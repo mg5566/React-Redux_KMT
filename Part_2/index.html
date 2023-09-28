@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.1 What is a Problem</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <input
+            type="text"
+            name="todo"
+            class="form-control"
+            placeholder="할 일을 입력하세요."
+          />
+        </div>
+        <div class="col-12">
+          <ul class="list-group">
+            <li class="list-group-item list-group-flat">
+              <div class="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <label for="checkbox">첫 번째 할 일</label>
+                <button type="button" class="btn btn-outline-secondary">
+                  X
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12">
+        할 일:<span>1건</span> 완료:<span>0건</span> 미완료:<span>0건</span>
+      </div>
+    </div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
