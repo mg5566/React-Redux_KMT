@@ -1,27 +1,47 @@
-const list = document.querySelector(".list-group");
-const todoContainer = document.createElement("li");
-const todoItem = document.createElement("div");
-const todoStatus = document.createElement("input");
-const todoLabel = document.createElement("label");
-const deleteButton = document.createElement("button");
+/*
+const vdom = {
+  tag: "",
+  props: {},
+  children: [{ tag: "", props: {}, children: [] }],
+};
+*/
 
-todoContainer.classList.add("list-group-item", "list-group-flat");
+const vdom = {
+  tag: "p",
+  props: {},
+  children: [
+    { tag: "h1", props: {}, children: ["Make a React"] },
+    {
+      tag: "ul",
+      props: {},
+      children: [
+        { tag: "li", props: {}, children: ["first item: Virtual DOM"] },
+        { tag: "li", props: {}, children: ["second item: Diffing"] },
+        { tag: "li", props: {}, children: ["third item: Reconciliation"] },
+      ],
+    },
+  ],
+};
 
-todoContainer.appendChild(todoItem);
+function createDOM(node) {
+  if (typeof node === "string") {
+    return document.createTextNode(node);
+  }
 
-todoItem.appendChild(todoStatus);
-todoItem.appendChild(todoLabel);
-todoItem.appendChild(deleteButton);
+  // document.createElement('');
+  const element = document.createElement(node.tag);
 
-todoItem.classList.add("checkbox");
+  /*
+  node.children
+    .map((child) => createDOM(child))
+    .forEach((item) => {
+      element.appendChild(item);
+    });
+  */
+  node.children.map(createDOM).forEach(element.appendChild);
+  // node.children.map(createDOM).forEach(element.appendChild.bind(element));
 
-todoStatus.setAttribute("id", "checkbox");
-todoStatus.setAttribute("type", "checkbox");
+  return element;
+}
 
-todoLabel.setAttribute("for", "checkbox");
-todoLabel.textContent = "첫 번째 할 일";
-
-deleteButton.classList.add("btn", "btn-outline-secondary", "btn-sm");
-deleteButton.textContent = "X";
-
-list.appendChild(todoContainer);
+document.querySelector("#root").appendChild(createDOM(vdom));
