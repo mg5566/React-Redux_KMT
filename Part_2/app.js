@@ -38,8 +38,7 @@ function createDOM(node) {
       element.appendChild(item);
     });
   */
-  node.children.map(createDOM).forEach(element.appendChild);
-  // node.children.map(createDOM).forEach(element.appendChild.bind(element));
+  node.children.map(createDOM).forEach(element.appendChild.bind(element));
 
   return element;
 }
