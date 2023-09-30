@@ -1,3 +1,4 @@
+/* @jsx createElement */
 import { createElement, render } from "./react.js";
 /*
 const vdom = {
@@ -7,16 +8,15 @@ const vdom = {
 };
 */
 
-const vdom = createElement(
-  "p",
-  {},
-  createElement("h1", {}, "Make a React"),
-  createElement(
-    "ul",
-    {},
-    createElement("li", { style: "color: red" }, "first item: Virtual DOM"),
-    createElement("li", { style: "color: blue" }, "second item: Diffing"),
-    createElement("li", { style: "color: green" }, "third item: Reconciliation")
-  )
+const vdom = (
+  <p>
+    <h1>Make a React</h1>
+    <ul>
+      <li style="color: red">first item: Virtual DOM</li>
+      <li style="color: blue">second item: Diffing</li>
+      <li style="color: green">third item: Reconciliation</li>
+    </ul>
+  </p>
 );
+
 render(vdom, document.querySelector("#root"));

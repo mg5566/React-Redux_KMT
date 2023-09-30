@@ -27,6 +27,8 @@ export function render(vdom, container) {
   container.appendChild(createDOM(vdom));
 }
 
+// export function createElement(tag, props = {}, ...children) {
 export function createElement(tag, props, ...children) {
+  props = props || {};
   return { tag, props, children };
 }
