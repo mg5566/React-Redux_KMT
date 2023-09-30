@@ -1,3 +1,10 @@
+
+export class Component {
+  constructor(props) {
+    this.props = props;
+  }
+}
+
 export function createDOM(node) {
   if (typeof node === "string") {
     return document.createTextNode(node);
@@ -23,16 +30,23 @@ export function createDOM(node) {
   return element;
 }
 
-export function render(vdom, container) {
-  container.appendChild(createDOM(vdom));
+function makeProps(props, children) {
+  return {
+    ...props,
+    children: children.length === 1 ? children[0] : children,
+  };
+}
 }
 
 // export function createElement(tag, props = {}, ...children) {
 export function createElement(tag, props, ...children) {
   props = props || {};
 
-  // tag 가 함수면
   if (typeof tag === "function") {
+    if (tag.prototype instanceof Component) {
+      const instance = new tag(makeProps(props, children));
+      return instance.render();
+    }
     if (children.length > 0) {
       return tag({
         ...props,
@@ -45,4 +59,20 @@ export function createElement(tag, props, ...children) {
   } else {
     return { tag, props, children };
   }
+
+export function render(vdom, container) {
+  container.appendChild(createDOM(vdom));
 }
+
+export const render = (function () {
+  let prevDOM = null;
+
+  return function (vdom, container) {
+    if (prevDOM === null) {
+      prevDOM = vdom;
+    }
+    // diff
+
+    container.appendChild(createDOM(vdom));
+  };
+})();
