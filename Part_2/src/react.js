@@ -33,8 +33,15 @@ export function createElement(tag, props, ...children) {
 
   // tag 가 함수면
   if (typeof tag === "function") {
-    // 함수 실행
-    return tag();
+    if (children.length > 0) {
+      return tag({
+        ...props,
+        children: children.length === 1 ? children[0] : children,
+      });
+    } else {
+      // 함수 실행
+      return tag(props);
+    }
   } else {
     return { tag, props, children };
   }

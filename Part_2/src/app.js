@@ -8,17 +8,21 @@ const vdom = {
 };
 */
 
-const Title = () => {
-  return <h1>Make a React well</h1>;
+const Title = (props) => {
+  return <h1 label={props.label}>{props.children}</h1>;
+};
+
+const Item = (props) => {
+  return <li style={`color: ${props.color}`}>{props.children}</li>;
 };
 
 const vdom = (
   <p>
-    <Title />
+    <Title label="React">Make a React well</Title>
     <ul>
-      <li style="color: red">first item: Virtual DOM</li>
-      <li style="color: blue">second item: Diffing</li>
-      <li style="color: green">third item: Reconciliation</li>
+      <Item color="red">first item: Virtual DOM</Item>
+      <Item color="blue">second item: Diffing</Item>
+      <Item color="green">third item: Reconciliation</Item>
     </ul>
   </p>
 );
