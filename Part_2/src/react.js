@@ -1,3 +1,5 @@
+const hooks = [];
+const currentComponent = 0;
 
 export class Component {
   constructor(props) {
@@ -36,6 +38,18 @@ function makeProps(props, children) {
     children: children.length === 1 ? children[0] : children,
   };
 }
+
+function useState(initValue) {
+  let position = currentComponent - 1;
+  if (!hooks[position]) {
+    hooks[position] = initValue;
+  }
+
+  const modifier = (nextValue) => {
+    hooks[position] = nextValue;
+  };
+
+  return [hooks[position], modifier];
 }
 
 // export function createElement(tag, props = {}, ...children) {
@@ -47,18 +61,18 @@ export function createElement(tag, props, ...children) {
       const instance = new tag(makeProps(props, children));
       return instance.render();
     }
+
+    hooks[currentComponent] = null;
+    currentComponent++;
+
     if (children.length > 0) {
-      return tag({
-        ...props,
-        children: children.length === 1 ? children[0] : children,
-      });
+      return tag(makeProps(props, children));
     } else {
-      // 함수 실행
       return tag(props);
     }
-  } else {
-    return { tag, props, children };
   }
+  return { tag, props, children };
+}
 
 export function render(vdom, container) {
   container.appendChild(createDOM(vdom));
