@@ -16,15 +16,22 @@ const Item = (props) => {
   return <li style={`color: ${props.color}`}>{props.children}</li>;
 };
 
-const vdom = (
-  <p>
-    <Title label="React">Make a React well</Title>
-    <ul>
-      <Item color="red">first item: Virtual DOM</Item>
-      <Item color="blue">second item: Diffing</Item>
-      <Item color="green">third item: Reconciliation</Item>
-    </ul>
-  </p>
-);
+/**
+ * App
+ *
+ * main component
+ */
+const App = () => {
+  return (
+    <p>
+      <Title label="React">Make a React well</Title>
+      <ul>
+        <Item color="red">first item: Virtual DOM</Item>
+        <Item color="blue">second item: Diffing</Item>
+        <Item color="green">third item: Reconciliation</Item>
+      </ul>
+    </p>
+  );
+};
 
-render(vdom, document.querySelector("#root"));
+render(<App />, document.querySelector("#root"));
