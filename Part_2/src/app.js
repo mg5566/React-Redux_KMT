@@ -8,9 +8,13 @@ const vdom = {
 };
 */
 
+const Title = () => {
+  return <h1>Make a React well</h1>;
+};
+
 const vdom = (
   <p>
-    <h1>Make a React</h1>
+    <Title />
     <ul>
       <li style="color: red">first item: Virtual DOM</li>
       <li style="color: blue">second item: Diffing</li>

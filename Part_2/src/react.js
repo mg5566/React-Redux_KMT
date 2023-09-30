@@ -30,5 +30,12 @@ export function render(vdom, container) {
 // export function createElement(tag, props = {}, ...children) {
 export function createElement(tag, props, ...children) {
   props = props || {};
-  return { tag, props, children };
+
+  // tag 가 함수면
+  if (typeof tag === "function") {
+    // 함수 실행
+    return tag();
+  } else {
+    return { tag, props, children };
+  }
 }
