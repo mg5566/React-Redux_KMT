@@ -1,4 +1,4 @@
-import { createDOM, render } from "./react.js";
+import { createElement, render } from "./react.js";
 /*
 const vdom = {
   tag: "",
@@ -7,33 +7,16 @@ const vdom = {
 };
 */
 
-const vdom = {
-  tag: "p",
-  props: {},
-  children: [
-    { tag: "h1", props: {}, children: ["Make a React"] },
-    {
-      tag: "ul",
-      props: {},
-      children: [
-        {
-          tag: "li",
-          props: { style: "color: red" },
-          children: ["first item: Virtual DOM"],
-        },
-        {
-          tag: "li",
-          props: { style: "color: blue" },
-          children: ["second item: Diffing"],
-        },
-        {
-          tag: "li",
-          props: { style: "color: green" },
-          children: ["third item: Reconciliation"],
-        },
-      ],
-    },
-  ],
-};
-
+const vdom = createElement(
+  "p",
+  {},
+  createElement("h1", {}, "Make a React"),
+  createElement(
+    "ul",
+    {},
+    createElement("li", { style: "color: red" }, "first item: Virtual DOM"),
+    createElement("li", { style: "color: blue" }, "second item: Diffing"),
+    createElement("li", { style: "color: green" }, "third item: Reconciliation")
+  )
+);
 render(vdom, document.querySelector("#root"));
